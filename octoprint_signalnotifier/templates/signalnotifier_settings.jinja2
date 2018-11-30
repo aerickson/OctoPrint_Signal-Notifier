@@ -1,0 +1,38 @@
+<h3>{{ _('SMS Notifier Configuration') }}</h3>
+
+<form class="form-horizontal">
+	<div class="control-group">
+		<div class="controls" title="{{ _('You can toggle whether notifications are enabled while a print is in progress.') }}">
+			<label class="checkbox">
+				<input type="checkbox" data-bind="checked: settings.plugins.freemobilenotifier.enabled" /> {{ _('Enabled') }}
+			</label>
+		</div>
+	</div>
+
+	<h4>{{ _('Signal Settings') }}</h4>
+
+	<div class="control-group" title="{{ _('Login') }}">
+		<label class="control-label">{{ _('Login') }}</label>
+		<div class="controls">
+			<input type="text" class="input-block-level" data-bind="value: settings.plugins.freemobilenotifier.login">
+		</div>
+	</div>
+
+	<div class="control-group" title="{{ _('Pass key') }}">
+		<label class="control-label">{{ _('Pass key') }}</label>
+		<div class="controls">
+			<input type="text" class="input-block-level" data-bind="value: settings.plugins.freemobilenotifier.pass_key">
+		</div>
+	</div>
+
+	<h4>{{ _('Message Content') }}</h4>
+	
+	<p>{{ _('The SMS template may contain the tags <code>{filename}</code> and <code>{elapsed_time}</code>.') }}</p>
+
+	<div class="control-group" title="{{ _('Content of notification email') }}">
+		<label class="control-label">{{ _('Body') }}</label>
+		<div class="controls">
+			<input type="text" class="input-block-level" data-bind="value: settings.plugins.freemobilenotifier.message_format.body">
+		</div>
+	</div>
+</form>
