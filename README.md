@@ -1,6 +1,6 @@
 # OctoPrint_Signal-Notifier
 
-Recieve Signal messages when OctoPrint jobs are complete.
+Recieve Signal (https://signal.org/) messages when OctoPrint jobs are complete.
 
 <!-- ![Settings tab and email screenshot](extras/freemobilenotifier.png) -->
 
