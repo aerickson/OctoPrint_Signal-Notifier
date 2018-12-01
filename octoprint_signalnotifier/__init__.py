@@ -16,10 +16,8 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 		return dict(
 			enabled=False,
 			path="signal-cli",
-			login="",
 			sender="",
 			recipient="",
-			pass_key="",
 			message_format=dict(
 				body="Job complete: {filename} done printing after {elapsed_time}" 
 			)
@@ -51,21 +49,19 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 		sender = self._settings.get(["sender"])
 		recipient = self._settings.get(["recipient"])
 		message = self._settings.get(["message_format", "body"]).format(**tags)
-		# login = self._settings.get(["login"])
-		# pass_key = self._settings.get(["pass_key"])
 
 		# ./signal-cli -u +4915151111111 send -m "My first message from the CLI" +4915152222222
-		the_command = "%s -u %s send -m \"%s\" %s" % (path, sender, message, recipient)
+		the_command = "%s -u %s send -m \"%s\" %s 2>&1" % (path, sender, message, recipient)
 		try:
-			# TODO: call signal-cli
+			# call signal-cli
 			osstdout = subprocess.check_call(the_command, shell=True)
-        # except subprocess.CalledProcessError:
+        # TODO: catch subprocess.CalledProcessError vs generic error?
 		except Exception as e:
 			# report problem sending message
-			self._logger.exception("Signal notification error: %s" % (str(e)))
+			self._logger.exception("Signal notification error: %s: %s" % (str(e)), osstdout)
 		else:
 			# report notification was sent
-			self._logger.info("Print notification sent to %s" % (self._settings.get(['login'])))
+			self._logger.info("Print notification sent to %s" % (self._settings.get(['recipient'])))
 
 	##~~ Softwareupdate hook
 	def get_update_information(self):
