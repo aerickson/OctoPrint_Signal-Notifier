@@ -4,6 +4,7 @@ from __future__ import absolute_import
 import os
 import octoprint.plugin
 import urllib2
+import subprocess
 
 class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
                                octoprint.plugin.SettingsPlugin,
@@ -47,8 +48,12 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 		login = self._settings.get(["login"])
 		pass_key = self._settings.get(["pass_key"])
 
+		# ./signal-cli -u +4915151111111 send -m "My first message from the CLI" +4915152222222
+		the_command = "signal-cli -u %s send -m \"%s\" %s" % (login, message, pass_key)
 		try:
 			# TODO: call signal-cli
+			osstdout = subprocess.check_call(the_command, shell=True)
+        # except subprocess.CalledProcessError:
 		except Exception as e:
 			# report problem sending message
 			self._logger.exception("Signal notification error: %s" % (str(e)))
