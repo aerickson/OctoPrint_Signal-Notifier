@@ -13,7 +13,11 @@ or manually using this URL:
 
 ## Configuration
 
-Ensure that signal-cli (https://github.com/AsamK/signal-cli) is installed and working on the host.
+Ensure that signal-cli (https://github.com/AsamK/signal-cli) is installed and working on the host. 
+  
+Raspbian Notes:
+  - https://github.com/AsamK/signal-cli/wiki/HowToUbuntu applies to Raspbian (and Octopi).
+  - https://gist.github.com/ribasco/fff7d30b31807eb02b32bcf35164f11f works for upgrading your Java.
 
 Test by running the following as the user Octoprint runs as. 
 
