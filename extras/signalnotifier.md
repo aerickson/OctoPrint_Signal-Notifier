@@ -35,4 +35,4 @@ compatibility:
 
 ---
 
-Receive SMS notifications when OctoPrint jobs are complete.
+Receive Signal messages when OctoPrint jobs are complete.
