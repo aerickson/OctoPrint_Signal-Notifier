@@ -46,14 +46,12 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 		message = self._settings.get(["message_format", "body"]).format(**tags)
 		login = self._settings.get(["login"])
 		pass_key = self._settings.get(["pass_key"])
-		url = 'https://smsapi.free-mobile.fr/sendmsg?&user='+login+'&pass='+pass_key+'&msg='+message
-		request = urllib2.Request(url)
 
 		try:
-			urllib2.urlopen(request)
+			# TODO: call signal-cli
 		except Exception as e:
-			# report problem sending sms
-			self._logger.exception("SMS notification error: %s" % (str(e)))
+			# report problem sending message
+			self._logger.exception("Signal notification error: %s" % (str(e)))
 		else:
 			# report notification was sent
 			self._logger.info("Print notification sent to %s" % (self._settings.get(['login'])))
