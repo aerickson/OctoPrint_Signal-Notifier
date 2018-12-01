@@ -36,3 +36,5 @@ compatibility:
 ---
 
 Receive Signal messages when OctoPrint jobs are complete.
+
+Requires https://github.com/AsamK/signal-cli to be installed and configured. See https://github.com/aerickson/OctoPrint_Signal-Notifier for more information.
