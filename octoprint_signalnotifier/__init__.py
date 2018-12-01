@@ -19,7 +19,7 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 			sender="",
 			recipient="",
 			message_format=dict(
-				body="Job complete: {filename} done printing after {elapsed_time}" 
+				body="OctoPrint@{host}: Job complete: {filename} done printing after {elapsed_time}" 
 			)
 		)
 
@@ -44,7 +44,10 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 		import octoprint.util
 		elapsed_time = octoprint.util.get_formatted_timedelta(datetime.timedelta(seconds=payload["time"]))
 
-		tags = {'filename': filename, 'elapsed_time': elapsed_time}
+		tags = {'filename': filename, 
+		        'elapsed_time': elapsed_time,
+		        'host': os.environ['HOST'],
+		        'user': os.environ['USER']}
 		path = self._settings.get(["path"])
 		sender = self._settings.get(["sender"])
 		recipient = self._settings.get(["recipient"])
