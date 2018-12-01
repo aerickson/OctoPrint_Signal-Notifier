@@ -1,4 +1,4 @@
-<h3>{{ _('SMS Notifier Configuration') }}</h3>
+<h3>{{ _('Signal Notifier Configuration') }}</h3>
 
 <form class="form-horizontal">
 	<div class="control-group">
@@ -10,6 +10,13 @@
 	</div>
 
 	<h4>{{ _('Signal Settings') }}</h4>
+
+	<div class="control-group" title="{{ _('path to signal-cli') }}">
+		<label class="control-label">{{ _('path to signal-cli') }}</label>
+		<div class="controls">
+			<input type="text" class="input-block-level" data-bind="value: settings.plugins.signalnotifier.path">
+		</div>
+	</div>
 
 	<div class="control-group" title="{{ _('Login') }}">
 		<label class="control-label">{{ _('Login') }}</label>

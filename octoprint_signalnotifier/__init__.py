@@ -15,6 +15,7 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 	def get_settings_defaults(self):
 		return dict(
 			enabled=False,
+			path="signal-cli",
 			login="",
 			pass_key="",
 			message_format=dict(
@@ -44,12 +45,13 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 		elapsed_time = octoprint.util.get_formatted_timedelta(datetime.timedelta(seconds=payload["time"]))
 
 		tags = {'filename': filename, 'elapsed_time': elapsed_time}
+		path = self._settings.get(["path"])
 		message = self._settings.get(["message_format", "body"]).format(**tags)
 		login = self._settings.get(["login"])
 		pass_key = self._settings.get(["pass_key"])
 
 		# ./signal-cli -u +4915151111111 send -m "My first message from the CLI" +4915152222222
-		the_command = "signal-cli -u %s send -m \"%s\" %s" % (login, message, pass_key)
+		the_command = "%s -u %s send -m \"%s\" %s" % (path, login, message, pass_key)
 		try:
 			# TODO: call signal-cli
 			osstdout = subprocess.check_call(the_command, shell=True)
