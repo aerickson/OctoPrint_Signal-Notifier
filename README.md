@@ -15,9 +15,15 @@ or manually using this URL:
 
 Ensure that signal-cli (https://github.com/AsamK/signal-cli) is installed and working on the host.
 
+Test by running the following as the user Octoprint runs as. 
+
+```
+signal-cli -u <sender> send -m "signal-cli works from $USER@$HOST" <recipient>
+```
+
 ## Acknowledgements
 
-Loosely based on [OctoPrint_FreeMobile-Notifier](https://github.com/Pinaute/OctoPrint_FreeMobile-Notifier)
+Loosely based on [OctoPrint_FreeMobile-Notifier](https://github.com/Pinaute/OctoPrint_FreeMobile-Notifier).
 
 ## License
 
