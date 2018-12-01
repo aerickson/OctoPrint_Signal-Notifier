@@ -1,7 +1,7 @@
 ---
 layout: plugin
 
-id: freemobilenotifier
+id: signalnotifier
 title: OctoPrint_Signal-Notifier
 description: Octoprint plugin for print completion notifications using Free (Free is a French telecommunications company)
 author: Antoine CAVARD
@@ -21,11 +21,11 @@ tags:
 - notification
 
 screenshots:
-- url: /assets/img/plugins/freemobilenotifier/freemobilenotifier.png
+- url: /assets/img/plugins/signalnotifier/signalnotifier.png
   alt: Settings dialog and SMS notification screenshot
   caption: Configure notification recipient, login, pass key and message.
 
-featuredimage: /assets/img/plugins/freemobilenotifier/freemobilenotifier.png
+featuredimage: /assets/img/plugins/signalnotifier/signalnotifier.png
 
 
 compatibility:
