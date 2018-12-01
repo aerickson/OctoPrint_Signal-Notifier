@@ -4,7 +4,7 @@
 	<div class="control-group">
 		<div class="controls" title="{{ _('You can toggle whether notifications are enabled while a print is in progress.') }}">
 			<label class="checkbox">
-				<input type="checkbox" data-bind="checked: settings.plugins.freemobilenotifier.enabled" /> {{ _('Enabled') }}
+				<input type="checkbox" data-bind="checked: settings.plugins.signalnotifier.enabled" /> {{ _('Enabled') }}
 			</label>
 		</div>
 	</div>
@@ -14,14 +14,14 @@
 	<div class="control-group" title="{{ _('Login') }}">
 		<label class="control-label">{{ _('Login') }}</label>
 		<div class="controls">
-			<input type="text" class="input-block-level" data-bind="value: settings.plugins.freemobilenotifier.login">
+			<input type="text" class="input-block-level" data-bind="value: settings.plugins.signalnotifier.login">
 		</div>
 	</div>
 
 	<div class="control-group" title="{{ _('Pass key') }}">
 		<label class="control-label">{{ _('Pass key') }}</label>
 		<div class="controls">
-			<input type="text" class="input-block-level" data-bind="value: settings.plugins.freemobilenotifier.pass_key">
+			<input type="text" class="input-block-level" data-bind="value: settings.plugins.signalnotifier.pass_key">
 		</div>
 	</div>
 
@@ -32,7 +32,7 @@
 	<div class="control-group" title="{{ _('Content of notification email') }}">
 		<label class="control-label">{{ _('Body') }}</label>
 		<div class="controls">
-			<input type="text" class="input-block-level" data-bind="value: settings.plugins.freemobilenotifier.message_format.body">
+			<input type="text" class="input-block-level" data-bind="value: settings.plugins.signalnotifier.message_format.body">
 		</div>
 	</div>
 </form>
