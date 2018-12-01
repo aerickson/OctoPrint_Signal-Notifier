@@ -2,7 +2,7 @@
 
 Recieve Signal (https://signal.org/) messages when OctoPrint jobs are complete.
 
-<!-- ![Settings tab and email screenshot](extras/freemobilenotifier.png) -->
+![Settings tab screenshot](extras/signalnotifier.png)
 
 ## Setup
 
