@@ -3,7 +3,7 @@ layout: plugin
 
 id: signalnotifier
 title: OctoPrint_Signal-Notifier
-description: Octoprint plugin for print completion notifications using Signal(https://signal.org/).
+description: Octoprint plugin for print completion notifications using Signal (https://signal.org/).
 author: Andrew Erickson
 license: AGPLv3
 
