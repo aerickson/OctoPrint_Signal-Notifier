@@ -3,11 +3,11 @@ layout: plugin
 
 id: signalnotifier
 title: OctoPrint_Signal-Notifier
-description: Octoprint plugin for print completion notifications using Free (Free is a French telecommunications company)
-author: Antoine CAVARD
+description: Octoprint plugin for print completion notifications using Signal(https://signal.org/).
+author: Andrew Erickson
 license: AGPLv3
 
-date: 2017-01-25
+date: 2018-12-01
 
 homepage: https://github.com/aerickson/OctoPrint_Signal-Notifier
 source: https://github.com/aerickson/OctoPrint_Signal-Notifier
@@ -22,8 +22,8 @@ tags:
 
 screenshots:
 - url: /assets/img/plugins/signalnotifier/signalnotifier.png
-  alt: Settings dialog and SMS notification screenshot
-  caption: Configure notification recipient, login, pass key and message.
+  alt: Settings dialog screenshot
+  caption: Configure path to signal-cli, sender, recipient, and message.
 
 featuredimage: /assets/img/plugins/signalnotifier/signalnotifier.png
 
