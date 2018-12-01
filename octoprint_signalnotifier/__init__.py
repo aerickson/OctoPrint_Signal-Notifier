@@ -1,9 +1,10 @@
 # coding=utf-8
 
 from __future__ import absolute_import
-import os
+import getpass
 import octoprint.plugin
-import urllib2
+import os
+import socket
 import subprocess
 
 class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
@@ -46,8 +47,8 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 
 		tags = {'filename': filename, 
 		        'elapsed_time': elapsed_time,
-		        'host': os.environ['HOST'],
-		        'user': os.environ['USER']}
+		        'host': socket.gethostname(),
+		        'user': getpass.getuser()}
 		path = self._settings.get(["path"])
 		sender = self._settings.get(["sender"])
 		recipient = self._settings.get(["recipient"])
