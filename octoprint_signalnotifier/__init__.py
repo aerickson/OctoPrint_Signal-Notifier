@@ -71,7 +71,7 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 	def get_update_information(self):
 		return dict(
 			freemobilenotifier=dict(
-				displayName="Signal Notifier",
+				displayName="signalnotifier",
 				displayVersion=self._plugin_version,
 
 				# version check: github repository
