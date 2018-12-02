@@ -24,10 +24,10 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
             )
         )
 
-   def get_settings_restricted_paths(self):
-       return dict(admin=[["path"], ["sender"], ["recipient"]],
-                   user=[["message_format", "body"]],
-                   never=[])        
+    def get_settings_restricted_paths(self):
+        return dict(admin=[["path"], ["sender"], ["recipient"]],
+                    user=[["message_format", "body"]],
+                    never=[])        
 
     def get_settings_version(self):
         return 1
