@@ -15,13 +15,18 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 	#~~ SettingsPlugin
 	def get_settings_defaults(self):
 		return dict(
-			enabled=False,
-			path="signal-cli",
-			dict(admin_only=dict(sender="",
-								recipient=""),
-			message_format=dict(
-				body="OctoPrint@{host}: Job complete: {filename} done printing after {elapsed_time}" 
-			)
+			admin_only=dict(
+						sender="",
+						recipient=""
+					),
+			user_only=dict(),
+			never=dict(
+						enabled=False,
+						path="signal-cli",
+						message_format=dict(
+							body="OctoPrint@{host}: Job complete: {filename} done printing after {elapsed_time}" 
+						)
+					),
 		)
 
 	def get_settings_version(self):
