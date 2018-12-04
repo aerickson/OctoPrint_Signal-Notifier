@@ -78,19 +78,20 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
             signalnotifier=dict(
                 displayName=self._plugin_name,
                 displayVersion=self._plugin_version,
+                current=self._plugin_version,
 
                 # version check: github repository
                 #type="github_release",
                 type="github_commit`",
                 user="aerickson",
                 repo="OctoPrint_Signal-Notifier",
-                current=self._plugin_version,
+                branch=master
 
                 # update method: pip
                 # - release
                 #pip="https://github.com/aerickson/OctoPrint_Signal-Notifier/archive/{target_version}.zip"
                 # - master tarball
-                pip="https://github.com/aerickson/OctoPrint_Signal-Notifier/archive/master.zip"
+                pip="https://github.com/aerickson/OctoPrint_Signal-Notifier/archive/{target}.zip"
             )
         )
 
