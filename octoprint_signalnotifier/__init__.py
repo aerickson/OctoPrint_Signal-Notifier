@@ -85,7 +85,7 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
                 type="github_commit",
                 user="aerickson",
                 repo="OctoPrint_Signal-Notifier",
-                branch=master
+                branch=master,
 
                 # update method: pip
                 # - release
