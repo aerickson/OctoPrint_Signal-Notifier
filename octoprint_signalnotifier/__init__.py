@@ -20,7 +20,7 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
             sender="",
             recipient="",
             message_format=dict(
-                body="OctoPrint@{host}: Job complete: {filename} done printing after {elapsed_time}" 
+                body="OctoPrint@{host}: Job complete: {filename} done printing after {elapsed_time}." 
             )
         )
 
