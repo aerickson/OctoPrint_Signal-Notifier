@@ -67,7 +67,7 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
         # TODO: catch subprocess.CalledProcessError vs generic error?
         except Exception as e:
             # report problem sending message
-            self._logger.exception("Signal notification error: %s: %s" % (str(e)), osstdout)
+            self._logger.exception("Signal notification error: %s: %s" % (str(e), osstdout))
         else:
             # report notification was sent
             self._logger.info("Print notification sent to %s" % (self._settings.get(['recipient'])))
