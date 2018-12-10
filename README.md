@@ -28,6 +28,11 @@ or manually using this URL:
 
     https://github.com/aerickson/OctoPrint_Signal-Notifier/archive/master.zip
 
+## Configuration
+
+Configuration is done via the settings panel. You must set a full path to signal-cli (I recommend placing signal-cli in /usr/local/), sender (must be configured in signal-cli), and a recipient. 
+
+Senders and recipients are phone numbers (e.g. +15551212).
 
 ## Acknowledgements
 
