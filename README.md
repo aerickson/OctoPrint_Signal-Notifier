@@ -9,6 +9,12 @@ Requires signal-cli be installed and configured. See [Prerequisites](README.md#P
 
 ## Prerequisites
 
+### two phone numbers
+
+You can't send and receive from the same phone number. Google Voice is handy for this.
+
+### signal-cli
+
 signal-cli (https://github.com/AsamK/signal-cli) is required for operation. You'll need to enable strong encryption or ensure you're running a recent version of Java.
 
 Helpful Links:
