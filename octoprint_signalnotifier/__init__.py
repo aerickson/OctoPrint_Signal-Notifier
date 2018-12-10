@@ -61,6 +61,7 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
 
         # ./signal-cli -u +4915151111111 send -m "My first message from the CLI" +4915152222222
         the_command = "%s -u %s send -m \"%s\" %s 2>&1" % (path, sender, message, recipient)
+        osstdout = ""
         try:
             # call signal-cli
             osstdout = subprocess.check_call(the_command, shell=True)
