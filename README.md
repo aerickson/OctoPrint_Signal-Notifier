@@ -38,7 +38,7 @@ or manually using this URL:
 
 Configuration is done via the settings panel. You must set a full path to signal-cli (I recommend placing signal-cli in /usr/local/), sender (must be configured in signal-cli), and a recipient. 
 
-Senders and recipients are phone numbers (e.g. +15551212).
+Senders and recipients are phone numbers (e.g. +12225554444).
 
 ## Acknowledgements
 
