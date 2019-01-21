@@ -1,0 +1,9 @@
+language: python
+
+install: 
+    - pip install jinja2
+
+script: 
+    - test/jinja_syntax_check.py
+    - test/py_syntax_check.sh
+
