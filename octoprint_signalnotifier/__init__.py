@@ -9,6 +9,10 @@ import os
 import shlex
 import socket
 import subprocess
+import time
+
+from octoprint.timelapse import Timelapse as timelapse
+from octoprint.settings import settings
 
 class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
                                octoprint.plugin.SettingsPlugin,
@@ -36,12 +40,13 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
             recipient="",
             message_format=dict(
                 body="OctoPrint@{host}: Job complete: {filename} done printing after {elapsed_time}." 
-            )
+            ),
+            send_snapshot=False
         )
 
     def get_settings_restricted_paths(self):
         return dict(admin=[["path"], ["sender"], ["recipient"]],
-                    user=[["message_format", "body"]],
+                    user=[["message_format", "body"], ["send_snapshot"]],
                     never=[])        
 
     def get_settings_version(self):
@@ -71,6 +76,7 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
         sender = self._settings.get(["sender"])
         recipient = self._settings.get(["recipient"])
         message = self._settings.get(["message_format", "body"]).format(**tags)
+        send_snapshot = self._settings.get(["send_snapshot"])
 
         # check that path is a valid executable
         if not self.is_exe(path):
@@ -96,13 +102,42 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
             self._logger.error("Command output: '%s'" % osstdout)
             return               
 
+        # TODO: pull command generation into a function so it's more easily tested
+
         # ./signal-cli -u +4915151111111 send -m "My first message from the CLI" +4915152222222
         # ./signal-cli -u +4915151111111 send -g <group_id> -m "My first message from the CLI to a group"
+        
+        group_string = ""
+        recipient_string = ""
+        # if a single recipient
         if recipient[:1] == "+":
-            the_command = "%s -u %s send -m \"%s\" %s" % (path, sender, message, recipient)
+            recipient_string = recipient
+            # the_command = "%s -u %s send -m \"%s\" %s" % (path, sender, message, recipient)
+        # if a group
         else:
-            the_command = "%s -u %s send -g %s -m \"%s\"" % (path, sender, recipient, message)
-        self._logger.debug("Command plugin will run is: '%s'" % the_command)
+            group_string = "-g %s" % (recipient)
+            # the_command = "%s -u %s send -g %s -m \"%s\"" % (path, sender, recipient, message)
+
+        attachment_argument = ""
+        if send_snapshot:
+            # only try to grab a snapshot if the url has been configured
+            if settings().get(["webcam", "snapshot"]):
+                tl=timelapse()
+                tl._image_number = 0
+                tl._capture_errors = 0
+                tl._capture_success = 0
+                tl._in_timelapse = True
+                tl._file_prefix = time.strftime("%Y%m%d%H%M%S")
+                self._logger.info("AJE: snapshot url: %s" % settings().get(["webcam", "snapshot"]))
+                snapshot_file=tl.capture_image()
+                attachment_argument = "-a \"%s\"" % (snapshot_file)
+                # the_command = "%s -u %s send -m \"%s\" %s -a \"%s\"" % (path, sender, message, recipient, snapshot_file)
+            else:
+                self._logger.error("Please configure the webcam before enabling snapshots!")
+
+        the_command = "%s -u %s send %s -m \"%s\" %s %s" % (path, sender, group_string, message, attachment_argument, recipient_string)
+        self._logger.info("Command plugin will run is: '%s'" % the_command)
+        
         try:
             rc, osstdout = self.run_command(the_command)
         # TODO: catch subprocess.CalledProcessError vs generic error?
