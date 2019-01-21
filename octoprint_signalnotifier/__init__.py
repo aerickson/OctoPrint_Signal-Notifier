@@ -97,7 +97,11 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
             return               
 
         # ./signal-cli -u +4915151111111 send -m "My first message from the CLI" +4915152222222
-        the_command = "%s -u %s send -m \"%s\" %s" % (path, sender, message, recipient)
+        # ./signal-cli -u +4915151111111 send -g <group_id> -m "My first message from the CLI to a group"
+        if recipient[:1] == "+":
+            the_command = "%s -u %s send -m \"%s\" %s" % (path, sender, message, recipient)
+        else:
+            the_command = "%s -u %s send -g %s -m \"%s\"" % (path, sender, recipient, message)
         self._logger.debug("Command plugin will run is: '%s'" % the_command)
         try:
             rc, osstdout = self.run_command(the_command)
