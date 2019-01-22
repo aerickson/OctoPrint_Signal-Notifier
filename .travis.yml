@@ -1,12 +1,16 @@
 language: python
+cache: pip
 python: 
   - "2.7"
-  - "3.6"
 
-install: 
-    - pip install jinja2
+install:
+    - git clone --depth 1 https://github.com/foosel/OctoPrint.git
+    - cd OctoPrint && pip install -e . && cd -
+    - pip install -r requirements-test.txt
+    - pip install -e .
 
 script: 
     - test/jinja_syntax_check.py
     - test/py_syntax_check.sh
+    - test/python_unit_tests.sh
 
