@@ -1,5 +1,7 @@
 # OctoPrint_Signal-Notifier
 
+[![Build Status](https://travis-ci.org/aerickson/OctoPrint_Signal-Notifier.svg?branch=master)](https://travis-ci.org/aerickson/OctoPrint_Signal-Notifier)
+
 Recieve Signal (https://signal.org/) messages when OctoPrint jobs are complete.
 
 Requires signal-cli be installed and configured. See [Prerequisites](README.md#Prerequisites) for more information. 
@@ -24,7 +26,7 @@ Helpful Links:
 Test by running the following as the user Octoprint runs as. 
 
 ```
-signal-cli -u <sender> send -m "signal-cli works from $USER@$HOST" <recipient>
+signal-cli -u <sender> send -m "signal-cli works from $USER@$HOSTNAME" <recipient>
 ```
 
 ## Installation
