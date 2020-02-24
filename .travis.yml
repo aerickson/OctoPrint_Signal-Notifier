@@ -2,9 +2,12 @@ language: python
 cache: pip
 python: 
   - "2.7"
+  - "3.6"
+  - "3.7"
+  - "3.8"
 
 install:
-    - git clone --depth 1 https://github.com/foosel/OctoPrint.git
+    - git clone -b devel --depth 1 https://github.com/foosel/OctoPrint.git
     - cd OctoPrint && pip install -e . && cd -
     - pip install -r requirements-test.txt
     - pip install -e .
