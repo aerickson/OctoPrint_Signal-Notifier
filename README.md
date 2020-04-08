@@ -1,6 +1,6 @@
 # OctoPrint_Signal-Notifier
 
-[![Build Status](https://travis-ci.org/aerickson/OctoPrint_Signal-Notifier.svg?branch=master)](https://travis-ci.org/aerickson/OctoPrint_Signal-Notifier)
+[![Build Status](https://travis-ci.com/aerickson/OctoPrint_Signal-Notifier.svg?branch=master)](https://travis-ci.com/aerickson/OctoPrint_Signal-Notifier)
 
 Recieve Signal (https://signal.org/) messages when OctoPrint jobs are complete.
 
