@@ -38,6 +38,7 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
             enabled=False,
             enabled_done=False,
             enabled_paused=False,
+            enabled_failed=False,
             path="/usr/local/bin/signal-cli",
             sender="",
             recipient="",
@@ -47,6 +48,9 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
             paused_message_format=dict(
                 body="OctoPrint@{host}: {filename}: Job paused!"
             ),
+            failed_message_format=dict(
+                body="OctoPrint@{host}: {filename}: Job failed after {elapsed_time} ({reason})!"
+            ),
             send_snapshot=False
         )
 
@@ -54,6 +58,7 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
         return dict(admin=[["path"], ["sender"], ["recipient"]],
                     user=[["message_format", "body"],
                           ["paused_message_format", "body"],
+                          ["failed_message_format", "body"],
                           ["send_snapshot"],
                           ],
                     never=[])
@@ -70,6 +75,7 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
             if self._settings.get_boolean(['enabled']):
                 self._settings.set(['enabled_paused'], True)
                 self._settings.set(['enabled_done'], True)
+                self._settings.set(['enabled_failed'], True)
 
     #~~ EventPlugin
     def on_event(self, event, payload):
@@ -78,12 +84,16 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
         if not self.configuration_ok():
             return
 
+        # see https://docs.octoprint.org/en/master/events/
         if event == "PrintDone":
             if self._settings.get(['enabled_done']):
                 self.handle_event_type(event, payload, 'done')
         elif event == 'PrintPaused':
             if self._settings.get(['enabled_paused']):
                 self.handle_event_type(event, payload, 'paused')
+        elif event == 'PrintFailed':
+            if self._settings.get(['enabled_failed']):
+                self.handle_event_type(event, payload, 'failed')
 
     ##~~ Softwareupdate hook
     def get_update_information(self):
@@ -193,13 +203,16 @@ class SignalNotifierPlugin(octoprint.plugin.EventHandlerPlugin,
                 'user': getpass.getuser()}
 
         if type == 'done':
-            # payload only has time for done events
             elapsed_time = octoprint.util.get_formatted_timedelta(datetime.timedelta(seconds=payload["time"]))
             tags['elapsed_time'] = elapsed_time
-
             message = self._settings.get(["message_format", "body"]).format(**tags)
         elif type == 'paused':
             message = self._settings.get(["paused_message_format", "body"]).format(**tags)
+        elif type == 'failed':
+            elapsed_time = octoprint.util.get_formatted_timedelta(datetime.timedelta(seconds=payload['time']))
+            tags['elapsed_time'] = elapsed_time
+            tags['reason'] = payload['reason']
+            message = self._settings.get(['failed_message_format', 'body']).format(**tags)
         else:
             self._logger.error("handle_event_type: unknown event type ('%s')" % type)
 

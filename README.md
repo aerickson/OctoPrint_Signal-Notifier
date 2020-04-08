@@ -4,20 +4,16 @@
 
 Recieve Signal (https://signal.org/) messages when OctoPrint jobs are complete.
 
-Requires signal-cli be installed and configured. See [Prerequisites](README.md#Prerequisites) for more information. 
+signal-cli ((https://github.com/AsamK/signal-cli)) must be installed and configured. See [Prerequisites](README.md#Prerequisites) for more information. 
 
 ![Settings tab screenshot](extras/signalnotifier.png)
 
 
 ## Prerequisites
 
-### two phone numbers
-
-You can't send and receive from the same phone number. Google Voice is handy for this.
-
 ### signal-cli
 
-signal-cli (https://github.com/AsamK/signal-cli) is required for operation. You'll need to enable strong encryption or ensure you're running a recent version of Java.
+Install signal-cli (https://github.com/AsamK/signal-cli). You'll need to enable strong encryption or ensure you're running a recent version of Java.
 
 Helpful Links:
   - Ubuntu/Raspbian/Octopi installation directions:  https://github.com/AsamK/signal-cli/wiki/HowToUbuntu
@@ -26,8 +22,14 @@ Helpful Links:
 Test by running the following as the user Octoprint runs as. 
 
 ```
-signal-cli -u <sender> send -m "signal-cli works from $USER@$HOSTNAME" <recipient>
+/usr/local/bin/signal-cli -u <sender> send -m "signal-cli works from $USER@$HOSTNAME" <recipient>
 ```
+
+### strongly recommended: two phone numbers
+
+Google Voice is my recommendation for a second phone number.
+
+Signal finally allows you to message yourself, but you won't get alerts (see [#22](https://github.com/aerickson/OctoPrint_Signal-Notifier/issues/22)).
 
 ## Installation
 
