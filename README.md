@@ -16,6 +16,7 @@ signal-cli ((https://github.com/AsamK/signal-cli)) must be installed and configu
 Install signal-cli (https://github.com/AsamK/signal-cli). You'll need to enable strong encryption or ensure you're running a recent version of Java.
 
 Helpful Links:
+  - Linux quick install: https://github.com/AsamK/signal-cli#install-system-wide-on-linux
   - Ubuntu/Raspbian/Octopi installation directions:  https://github.com/AsamK/signal-cli/wiki/HowToUbuntu
   - Ubuntu/Raspbian/Octopi java upgrade directions: https://gist.github.com/ribasco/fff7d30b31807eb02b32bcf35164f11f
 
